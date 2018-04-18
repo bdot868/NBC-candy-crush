@@ -35,7 +35,7 @@ var tilecolors = [[255, 128, 128],
                   [128, 255, 255],
                   [255, 255, 255]];
 
-var keywords = ["apples", "oranges", "grapes", "bananas", "plums", "pears", "kiwi"];
+var keywords = ["Visa", "Loan", "Auto", "Procare", "Omni", "Stocks", "Bonds"];
 
 // Clusters and moves that were found
 var clusters = [];  // { column, row, length, horizontal }
@@ -69,6 +69,13 @@ var gameover = false;
 var buttons = [ { x: 30, y: 240, width: 150, height: 50, text: "New Game"},
                 { x: 30, y: 300, width: 150, height: 50, text: "Show Moves"}];
                 // { x: 30, y: 360, width: 150, height: 50, text: "Enable AI Bot"}];
+
+//Create the logo image
+var image = new Image();
+image.onload = function () {
+
+};
+image.src = "https://www.jncb.com/JNCB/media/Main-Librarie/jncb-logo.png?ext=.png";
 
 // Initialize the game
 function init() {
@@ -298,13 +305,15 @@ function drawFrame() {
     context.fillRect(1, 1, canvas.width-2, canvas.height-2);
 
     // Draw header
-    context.fillStyle = "#303030";
+    // context.fillStyle = "#303030";
+    context.fillStyle = "#ffffff";
     context.fillRect(0, 0, canvas.width, 65);
 
     // Draw title
     context.fillStyle = "#ffffff";
     context.font = "24px Verdana";
-    context.fillText("NBC CRUSH", 10, 30);
+    // context.fillText("NBC CRUSH", 10, 30);
+    context.drawImage(image, 10, 10)
 
     // Display fps
     // context.fillStyle = "#ffffff";
@@ -345,9 +354,10 @@ function renderTiles() {
 
                 // Draw the tile using the color
                 // drawCenterText("hey", coord.tilex+30, coord.tiley+30, 40)
-                // drawTile(coord.tilex, coord.tiley, col[0], col[1], col[2]);
-                context.fillStyle = "#ffffff";
-                context.font = "14px Verdana";
+                 drawTile(coord.tilex, coord.tiley, col[0], col[1], col[2]);
+                 // drawTile(coord.tilex, coord.tiley, 255, 255, 255);
+                context.fillStyle = "#000000";
+                context.font = "15px Verdana";
 
                 drawCenterText(keywords[level.tiles[i][j].type], coord.tilex+20, coord.tiley+40, 40);
                 // context.fillText("hey", coord.tilex, coord.tiley)
