@@ -77,6 +77,9 @@ image.onload = function () {
 };
 image.src = "https://www.jncb.com/JNCB/media/Main-Librarie/jncb-logo.png?ext=.png";
 
+var tileDrop, tileSwitch, gameDoneSound;
+
+
 // Initialize the game
 function init() {
     // Add mouse events
@@ -84,6 +87,9 @@ function init() {
     canvas.addEventListener("mousedown", onMouseDown);
     canvas.addEventListener("mouseup", onMouseUp);
     canvas.addEventListener("mouseout", onMouseOut);
+
+    tileDrop = new sound("candy_land2.wav");
+    tileSwitch = new sound("switch_sound1.wav");
 
     // Initialize the two-dimensional tile array
     for (var i=0; i<level.columns; i++) {
@@ -248,6 +254,23 @@ function updateFps(dt) {
     framecount++;
 }
 
+
+//Create sound object
+function sound(src) {
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+    this.play = function(){
+        this.sound.play();
+    }
+    this.stop = function(){
+        this.sound.pause();
+    }
+}
+
 // Draw text that is centered
 function drawCenterText(text, x, y, width) {
     var textdim = context.measureText(text);
@@ -271,7 +294,7 @@ function render() {
     // Draw level background
     var levelwidth = level.columns * level.tilewidth;
     var levelheight = level.rows * level.tileheight;
-    context.fillStyle = "#000000";
+    context.fillStyle = "#1852af";
     context.fillRect(level.x - 4, level.y - 4, levelwidth + 8, levelheight + 8);
 
     // Render tiles
@@ -325,11 +348,11 @@ function drawFrame() {
 function drawButtons() {
     for (var i=0; i<buttons.length; i++) {
         // Draw button shape
-        context.fillStyle = "#000000";
+        context.fillStyle = "#1852af";
         context.fillRect(buttons[i].x, buttons[i].y, buttons[i].width, buttons[i].height);
 
         // Draw button text
-        context.fillStyle = "#ffffff";
+        context.fillStyle = "#f4e513";
         context.font = "18px Verdana";
         var textdim = context.measureText(buttons[i].text);
         context.fillText(buttons[i].text, buttons[i].x + (buttons[i].width-textdim.width)/2, buttons[i].y+30);
@@ -354,9 +377,9 @@ function renderTiles() {
 
                 // Draw the tile using the color
                 // drawCenterText("hey", coord.tilex+30, coord.tiley+30, 40)
-                 drawTile(coord.tilex, coord.tiley, col[0], col[1], col[2]);
-                 // drawTile(coord.tilex, coord.tiley, 255, 255, 255);
-                context.fillStyle = "#000000";
+                 //drawTile(coord.tilex, coord.tiley, col[0], col[1], col[2]);
+                  drawTile(coord.tilex, coord.tiley, 255, 255, 255);
+                context.fillStyle = "#1852af";
                 context.font = "15px Verdana";
 
                 drawCenterText(keywords[level.tiles[i][j].type], coord.tilex+20, coord.tiley+40, 40);
@@ -404,6 +427,7 @@ function renderTiles() {
             // Draw the tiles
             drawTile(coord2shift.tilex, coord2shift.tiley, col2[0], col2[1], col2[2]);
             drawTile(coord1shift.tilex, coord1shift.tiley, col1[0], col1[1], col1[2]);
+            tileSwitch.play();
         }
     }
 }
@@ -685,6 +709,7 @@ function removeClusters() {
 
 // Shift tiles and insert new tiles
 function shiftTiles() {
+  tileDrop.play();
     // Shift tiles
     for (var i=0; i<level.columns; i++) {
         for (var j=level.rows-1; j>=0; j--) {
