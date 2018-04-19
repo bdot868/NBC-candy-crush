@@ -75,7 +75,7 @@ var image = new Image();
 image.onload = function () {
 
 };
-image.src = "https://www.jncb.com/JNCB/media/Main-Librarie/jncb-logo.png?ext=.png";
+image.src = "NCB-logo2_.png";
 
 var tileDrop, tileSwitch, gameDoneSound;
 
@@ -294,7 +294,7 @@ function render() {
     // Draw level background
     var levelwidth = level.columns * level.tilewidth;
     var levelheight = level.rows * level.tileheight;
-    context.fillStyle = "#1852af";
+    context.fillStyle = "#023689";
     context.fillRect(level.x - 4, level.y - 4, levelwidth + 8, levelheight + 8);
 
     // Render tiles
@@ -336,7 +336,7 @@ function drawFrame() {
     context.fillStyle = "#ffffff";
     context.font = "24px Verdana";
     // context.fillText("NBC CRUSH", 10, 30);
-    context.drawImage(image, 10, 10)
+    context.drawImage(image, 10, 10, 225, 50)
 
     // Display fps
     // context.fillStyle = "#ffffff";
@@ -348,7 +348,7 @@ function drawFrame() {
 function drawButtons() {
     for (var i=0; i<buttons.length; i++) {
         // Draw button shape
-        context.fillStyle = "#1852af";
+        context.fillStyle = "#023689";
         context.fillRect(buttons[i].x, buttons[i].y, buttons[i].width, buttons[i].height);
 
         // Draw button text
