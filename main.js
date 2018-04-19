@@ -376,9 +376,7 @@ function renderTiles() {
                 var col = tilecolors[level.tiles[i][j].type];
 
                 // Draw the tile using the color
-                // drawCenterText("hey", coord.tilex+30, coord.tiley+30, 40)
-                 //drawTile(coord.tilex, coord.tiley, col[0], col[1], col[2]);
-                  drawTile(coord.tilex, coord.tiley, 255, 255, 255);
+                 drawTile(coord.tilex, coord.tiley, col[0], col[1], col[2]);
                 context.fillStyle = "#1852af";
                 context.font = "15px Verdana";
 
